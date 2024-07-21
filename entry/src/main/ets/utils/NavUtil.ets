@@ -74,7 +74,7 @@ export default class NavUtil {
 
   /**
    * 获取状态栏高
-   * @returns 状态栏高
+   * @returns 状态栏高px
    */
   public getAppBarHeight(): number {
     return AppStorage.get<number>(NavUtil.APP_BAR_HEIGHT) ?? 0;

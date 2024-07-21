@@ -5,7 +5,7 @@ import { HapticFeedbackEnum, HapticFeedBack } from '../utils/HapticFeedBack';
 @Component
 struct Index {
   build() {
-    RelativeContainer() {
+    Column() {
       Stack() {
         // 顶部导航栏
         TopNavWidget()
@@ -16,11 +16,10 @@ struct Index {
       }
       .width('100%')
       .height('100%')
-      .backgroundColor(Color.Blue)
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(Color.Gray)
+    .backgroundColor(0xE5E5E5)
   }
 }
 
@@ -30,15 +29,14 @@ struct Index {
 @Component
 struct TopNavWidget {
   build() {
-    RelativeContainer() {
+    Column() {
       // 标题栏
-      RelativeContainer() {
-        Text('StatusBar').margin({left: 20})
+      Row() {
+        Text('控件').fontSize(26).margin({left: 20}).fontWeight(FontWeight.Bold)
       }
       .width('100%')
-      .backgroundColor(Color.White)
+      .height(90 - (px2vp(NavUtil.getInstance().getAppBarHeight())))
       .margin({top: NavUtil.getInstance().getAppBarHeightPX()})
-      .border({width: 1, color: Color.Black})
     }
     .width('100%')
     .height(90)
@@ -57,12 +55,37 @@ struct BottomNavWidget {
     RelativeContainer() {
       RelativeContainer() {
         Row() {
-          Text('UI')
-          Text('Sensor') {
-          }.onClick(() => {
-            HapticFeedBack.start(HapticFeedbackEnum.HARD);
-          })
-          Text('Other')
+          Column() {
+            SymbolGlyph($r('sys.symbol.ohos_folder_badge_plus'))
+              .fontSize(26)
+              .fontColor([$r('app.color.bottom_nav_current'), $r('app.color.bottom_nav_current'), $r('app.color.bottom_nav_current')])
+              .renderingStrategy(SymbolRenderingStrategy.SINGLE)
+              .margin({top: 4, bottom: 2})
+            Text('控件').height('30%').fontSize(12).fontColor(0x3B7AEA)
+          }
+          .width('33%')
+          .height('100%')
+
+          Column() {
+            SymbolGlyph($r('sys.symbol.ohos_circle'))
+              .fontSize(26)
+              .renderingStrategy(SymbolRenderingStrategy.SINGLE)
+              .margin({top: 4, bottom: 2})
+            Text('功能').height('30%').fontSize(12)
+          }
+          .width('33%')
+          .height('100%')
+
+          Column() {
+            SymbolGlyph($r('sys.symbol.ranking'))
+              .fontSize(26)
+              .renderingStrategy(SymbolRenderingStrategy.SINGLE)
+              .margin({top: 4, bottom: 2})
+            Text('特性').height('30%').fontSize(12)
+          }
+          .width('33%')
+          .height('100%')
+
         }
         .width('100%')
         .height('100%')
@@ -94,7 +117,6 @@ struct BodyWidget {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(Color.Orange)
     .zIndex(1)
   }
 }

@@ -7,6 +7,10 @@
     {
       "name": "item_title_font",
       "value": "#E6000000"
+    },
+    {
+      "name": "bottom_nav_current",
+      "value": "#FF3B7AEB"
     }
   ]
 }
