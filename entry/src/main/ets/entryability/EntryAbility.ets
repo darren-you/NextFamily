@@ -3,7 +3,6 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import NavUtil from '../utils/NavUtil';
 
-
 export default class EntryAbility extends UIAbility {
   private static DOMAIN = 0x0000;
   private static TAG = 'EntryAbility';

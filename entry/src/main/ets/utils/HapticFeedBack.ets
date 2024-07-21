@@ -59,7 +59,7 @@ export class HapticFeedBack {
 }
 
 export enum HapticFeedbackEnum {
-  SOFT = vibrator.HapticFeedback.EFFECT_SOFT,
-  HARD = vibrator.HapticFeedback.EFFECT_HARD,
-  SHARP = vibrator.HapticFeedback.EFFECT_SHARP,
+  SOFT,
+  HARD,
+  SHARP,
 }

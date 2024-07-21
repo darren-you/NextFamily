@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\Darren.you\\.ohos\\config\\default_NextFamily_YVGXU2uBvQSk30BFSyuwQjY3jjhvQnGrePdfgbQfBHo=.cer",
-          "storePassword": "0000001BABDE66412E85BB73F5FC8DEFD451160DB36DC2C17B7A7B5E393A10620E818B4D7AB1E858020B69",
+          "certpath": "/Users/darrenyou/.ohos/config/default_NextFamily_Mcvl_NCwi3JUsdDo_Uqn6Xc81z04YRpp7-bM2Gj8Aas=.cer",
+          "storePassword": "0000001B3696577F4E5B2785EB1155E028C0877977D70E8315A5F23DF3CC74E99A6D17BC1D2C07D59434EC",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B054AF980F08CEFC3444A768FA2DEAC9901BCFC4375741E9BC3893681EB068E7F75F882EDACF165",
-          "profile": "C:\\Users\\Darren.you\\.ohos\\config\\default_NextFamily_YVGXU2uBvQSk30BFSyuwQjY3jjhvQnGrePdfgbQfBHo=.p7b",
+          "keyPassword": "0000001B7F40E5BB13830D8A3AF77D6CA96B85759846A57B6F28475981375CA4E67F13CBD8C8531C2D81A3",
+          "profile": "/Users/darrenyou/.ohos/config/default_NextFamily_Mcvl_NCwi3JUsdDo_Uqn6Xc81z04YRpp7-bM2Gj8Aas=.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\Darren.you\\.ohos\\config\\default_NextFamily_YVGXU2uBvQSk30BFSyuwQjY3jjhvQnGrePdfgbQfBHo=.p12"
+          "storeFile": "/Users/darrenyou/.ohos/config/default_NextFamily_Mcvl_NCwi3JUsdDo_Uqn6Xc81z04YRpp7-bM2Gj8Aas=.p12"
         }
       }
     ],
