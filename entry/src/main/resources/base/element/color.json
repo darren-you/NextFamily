@@ -11,6 +11,10 @@
     {
       "name": "bottom_nav_current",
       "value": "#FF3B7AEB"
+    },
+    {
+      "name": "main_background",
+      "value": "#FFEDEDED"
     }
   ]
 }

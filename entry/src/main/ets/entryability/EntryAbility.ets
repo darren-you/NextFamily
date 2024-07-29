@@ -1,7 +1,7 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import NavUtil from '../utils/NavUtil';
+import { NavUtil } from '@darren/common';
 
 export default class EntryAbility extends UIAbility {
   private static DOMAIN = 0x0000;

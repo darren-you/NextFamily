@@ -2,7 +2,7 @@ import { window } from '@kit.ArkUI';
 import hilog from '@ohos.hilog';
 import { BusinessError } from '@kit.BasicServicesKit';
 
-export default class NavUtil {
+export class NavUtil {
   private static DOMAIN = 0x0001;
   private static TAG = 'NavUtil';
   private static APP_BAR_HEIGHT = 'appBarHeight';
