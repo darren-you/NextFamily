@@ -1,3 +1,4 @@
+import { router, AppStorageV2 } from '@kit.ArkUI';
 import { NavUtil } from '@darren/common'
 
 let appBarHeight: number = 90;
@@ -5,9 +6,8 @@ let bottomNavHeight: number = 80;
 let swiperController: SwiperController = new SwiperController();
 
 @Entry
-@Component
+@ComponentV2
 struct Index {
-  @State currentNavTab: NavTabEnum = NavTabEnum.COMPONENTS;
   build() {
     Column() {
       Stack() {
@@ -16,7 +16,7 @@ struct Index {
         // Body内容区域
         BodyWidget()
         // 底部导航栏
-        BottomNavWidget(currentNavTab)
+        BottomNavWidget()
       }
       .width('100%')
       .height('100%')
@@ -30,13 +30,15 @@ struct Index {
 /**
  * 顶部导航栏
  */
-@Component
+@ComponentV2
 struct TopNavWidget {
+  @Local currentNavTabState: NavTabState = AppStorageV2.connect(NavTabState, () => new NavTabState())!;
+
   build() {
     Column() {
       // 标题栏
       Row() {
-        Text('控件').fontSize(26).margin({left: 20}).fontWeight(FontWeight.Bold)
+        Text(this.currentNavTabState.titleText).fontSize(26).margin({left: 20}).fontWeight(FontWeight.Bold)
       }
       .width('100%')
       .height(appBarHeight - (px2vp(NavUtil.getInstance().getAppBarHeight())))
@@ -53,50 +55,68 @@ struct TopNavWidget {
 /**
  * 底部导航栏
  */
-@Component
+@ComponentV2
 struct BottomNavWidget {
+  @Local currentNavTabState: NavTabState = AppStorageV2.connect(NavTabState, () => new NavTabState())!;
+
   build() {
     Row() {
       Row() {
         Column() {
           SymbolGlyph($r('sys.symbol.ohos_folder_badge_plus'))
             .fontSize(26)
-            .fontColor([$r('app.color.bottom_nav_current'), $r('app.color.bottom_nav_current'), $r('app.color.bottom_nav_current')])
+            .fontColor(this.currentNavTabState.currentNavTab === 0 ? [$r('app.color.bottom_nav_current'), $r('app.color.bottom_nav_current'), $r('app.color.bottom_nav_current')] : [$r('app.color.bottom_nav_normal'), $r('app.color.bottom_nav_normal'), $r('app.color.bottom_nav_normal')])
             .renderingStrategy(SymbolRenderingStrategy.SINGLE)
             .margin({top: 4, bottom: 2})
-          Text('控件').height('30%').fontSize(12).fontColor(0x3B7AEA)
+          Text('控件')
+            .height('30%')
+            .fontSize(12)
+            .fontColor(this.currentNavTabState.currentNavTab === 0 ? $r('app.color.item_title_font_current') : $r('app.color.item_title_font_normal'))
         }
         .width('33%')
         .height('100%')
         .onClick(() => {
-          currentNavTab(NavTabEnum.COMPONENTS);
-          this.
+          currentNavTab(0);
+          this.currentNavTabState.currentNavTab = 0;
+          this.currentNavTabState.titleText = "控件";
         })
 
         Column() {
           SymbolGlyph($r('sys.symbol.ohos_circle'))
             .fontSize(26)
+            .fontColor(this.currentNavTabState.currentNavTab === 1 ? [$r('app.color.bottom_nav_current'), $r('app.color.bottom_nav_current'), $r('app.color.bottom_nav_current')] : [$r('app.color.bottom_nav_normal'), $r('app.color.bottom_nav_normal'), $r('app.color.bottom_nav_normal')])
             .renderingStrategy(SymbolRenderingStrategy.SINGLE)
             .margin({top: 4, bottom: 2})
-          Text('功能').height('30%').fontSize(12)
+          Text('功能')
+            .height('30%')
+            .fontSize(12)
+            .fontColor(this.currentNavTabState.currentNavTab === 1 ? $r('app.color.item_title_font_current') : $r('app.color.item_title_font_normal'))
         }
         .width('33%')
         .height('100%')
         .onClick(() => {
-          currentNavTab(NavTabEnum.FEATURE);
+          currentNavTab(1);
+          this.currentNavTabState.currentNavTab = 1;
+          this.currentNavTabState.titleText = "功能";
         })
 
         Column() {
           SymbolGlyph($r('sys.symbol.ranking'))
             .fontSize(26)
+            .fontColor(this.currentNavTabState.currentNavTab === 2 ? [$r('app.color.bottom_nav_current'), $r('app.color.bottom_nav_current'), $r('app.color.bottom_nav_current')] : [$r('app.color.bottom_nav_normal'), $r('app.color.bottom_nav_normal'), $r('app.color.bottom_nav_normal')])
             .renderingStrategy(SymbolRenderingStrategy.SINGLE)
             .margin({top: 4, bottom: 2})
-          Text('特性').height('30%').fontSize(12)
+          Text('特性')
+            .height('30%')
+            .fontSize(12)
+            .fontColor(this.currentNavTabState.currentNavTab === 2 ? $r('app.color.item_title_font_current') : $r('app.color.item_title_font_normal'))
         }
         .width('33%')
         .height('100%')
         .onClick(() => {
-          currentNavTab(NavTabEnum.SPECIAL);
+          currentNavTab(2);
+          this.currentNavTabState.currentNavTab = 2;
+          this.currentNavTabState.titleText = "特性";
         })
       }
       .width('100%')
@@ -131,8 +151,9 @@ struct BodyWidget {
         .width('100%')
         .height('100%')
         .justifyContent(FlexAlign.Center)
-        .backgroundColor("$color:main_background")
+        .backgroundColor(Color.Green)
         .padding({top: appBarHeight, bottom: bottomNavHeight})
+
 
 
         Column(){
@@ -143,7 +164,7 @@ struct BodyWidget {
         .width('100%')
         .height('100%')
         .justifyContent(FlexAlign.Center)
-        .backgroundColor("$color:main_background")
+        .backgroundColor(Color.Blue)
         .padding({top: appBarHeight, bottom: bottomNavHeight})
 
         Column(){
@@ -154,11 +175,13 @@ struct BodyWidget {
         .width('100%')
         .height('100%')
         .justifyContent(FlexAlign.Center)
-        .backgroundColor("$color:main_background")
+        .backgroundColor(Color.Yellow)
         .padding({top: appBarHeight, bottom: bottomNavHeight})
       }
+      .disableSwipe(true)
       .indicator(false)
       .loop(false)
+
     }
     .width('100%')
     .height('100%')
@@ -166,12 +189,13 @@ struct BodyWidget {
   }
 }
 
-function currentNavTab(navTabEnum: NavTabEnum): void {
+function currentNavTab(navTabEnum: number): void {
   swiperController.changeIndex(navTabEnum.valueOf(), true);
 }
 
-enum NavTabEnum {
-  COMPONENTS = 0,
-  FEATURE = 1,
-  SPECIAL = 2,
+// 数据中心
+@ObservedV2
+export class NavTabState {
+  @Trace currentNavTab: number = 0;
+  @Trace titleText: string = "控件";
 }

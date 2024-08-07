@@ -5,12 +5,20 @@
       "value": "#FFFFFF"
     },
     {
-      "name": "item_title_font",
+      "name": "item_title_font_current",
+      "value": "#FF3B7AEB"
+    },
+    {
+      "name": "item_title_font_normal",
       "value": "#E6000000"
     },
     {
       "name": "bottom_nav_current",
       "value": "#FF3B7AEB"
+    },
+    {
+      "name": "bottom_nav_normal",
+      "value": "#E6000000"
     },
     {
       "name": "main_background",
