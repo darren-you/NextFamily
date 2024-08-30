@@ -1,15 +1,14 @@
 import { promptAction } from '@kit.ArkUI'
 import PhoneNumberUtil from '../../utils/PhoneNumberUtil'
 import VerifyCodeUtil from '../../utils/VerifyCodeUtil'
-
 import { THIRD_LOGIN_TYPE } from './ThirdLoginEnum'
 import { ThirdLoginVO } from './ThirdLoginVO'
 import { SmsLoginDialogVO } from './SmsLoginDialogVO'
 import { CommonDialog } from '../CommonDialog'
 import { AgreementDocDialogVO } from '../agreementdialog/AgreementDocDialogVO'
 import { AgreementDocDialogComponent } from '../agreementdialog/AgreementDocDialog'
+import { Logger } from '../../utils/Logger'
 import { BreakpointConstants } from '../../constant/BreakpointConstants'
-import { AnyEtsUtils } from '../../utils/AnyEtsUtils'
 
 /**
  * 第三方登录
@@ -66,7 +65,7 @@ struct ThirdLoginComponent {
         // todo 使用微信登录具体实现
         break
       default :
-        AnyEtsUtils.log('Unknown thirdLogin type')
+        Logger.debug('Unknown thirdLogin type')
         return
     }
   }
@@ -84,7 +83,7 @@ struct AgreementComponent {
       Checkbox()
         .select(this.agreementState)
         .onChange((selectStatus: boolean) => {
-          AnyEtsUtils.log('selectStatus = ' + selectStatus)
+          Logger.debug('selectStatus = ' + selectStatus)
           this.agreementState = selectStatus
         })
       Text(' 我已阅读并同意').fontSize(12).fontColor('#6c6c6c')
@@ -199,58 +198,58 @@ export struct SmsLoginDialog {
   }
 
   getWidth(): Length {
-    AnyEtsUtils.log('getWidth 折叠状态: ' + this.sdkFoldStatus + ' 屏幕方向: ' + this.currentOrientation)
+    Logger.debug('getWidth 折叠状态: ' + this.sdkFoldStatus + ' 屏幕方向: ' + this.currentOrientation)
     let defaultWidth = '50%'
     switch (this.sdkFoldStatus) {
       // Unknown | 直屏
       case 0:
         this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultWidth = '80%' : defaultWidth = '50%'
-        AnyEtsUtils.log('Unknown | 直屏 宽: ' + defaultWidth)
+        Logger.debug('Unknown | 直屏 宽: ' + defaultWidth)
         break
       // 折叠屏 [展开、半折] 态
       case 1:
       case 3:
         this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultWidth = '55%' : defaultWidth = '50%'
-        AnyEtsUtils.log('折叠屏 [展开、半折] 态 宽: ' + defaultWidth)
+        Logger.debug('折叠屏 [展开、半折] 态 宽: ' + defaultWidth)
         break
       // 折叠屏 折叠态
       case 2:
         this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultWidth = '90%' : defaultWidth = '50%'
-        AnyEtsUtils.log('折叠屏 折叠态 宽: ' + defaultWidth)
+        Logger.debug('折叠屏 折叠态 宽: ' + defaultWidth)
         break
       default:
         defaultWidth = '50%'
-        AnyEtsUtils.log('未知态默认 宽: ' + defaultWidth)
+        Logger.debug('未知态默认 宽: ' + defaultWidth)
     }
     return defaultWidth
   }
 
   getHeight(): Length {
-    AnyEtsUtils.log('getHeight 折叠状态: ' + this.sdkFoldStatus + ' 屏幕方向: ' + this.currentOrientation)
+    Logger.debug('getHeight 折叠状态: ' + this.sdkFoldStatus + ' 屏幕方向: ' + this.currentOrientation)
     let defaultHeight = '50%'
     switch (this.sdkFoldStatus) {
       // Unknown | 直屏
       case 0:
         //this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '30%' : defaultHeight = '90%'
         this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '35%' : defaultHeight = '75%'
-        AnyEtsUtils.log('Unknown | 直屏 高: ' + defaultHeight)
+        Logger.debug('Unknown | 直屏 高: ' + defaultHeight)
         break
       // 折叠屏 [展开、半折] 态
       case 1:
       case 3:
         //this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '45%' : defaultHeight = '50%'
         this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '35%' : defaultHeight = '40%'
-        AnyEtsUtils.log('折叠屏 [展开、半折] 态 高: ' + defaultHeight)
+        Logger.debug('折叠屏 [展开、半折] 态 高: ' + defaultHeight)
         break
       // 折叠屏 折叠态
       case 2:
         //this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '45%' : defaultHeight = '90%'
         this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '35%' : defaultHeight = '80%'
-        AnyEtsUtils.log('折叠屏 折叠态 高: ' + defaultHeight)
+        Logger.debug('折叠屏 折叠态 高: ' + defaultHeight)
         break
       default:
         defaultHeight = '50%'
-        AnyEtsUtils.log('未知态默认 高: ' + defaultHeight)
+        Logger.debug('未知态默认 高: ' + defaultHeight)
     }
     return defaultHeight
   }
@@ -259,7 +258,7 @@ export struct SmsLoginDialog {
    * 获取验证码
    */
   requestSmsCode(phoneNumber: string): void {
-    AnyEtsUtils.log('requestSmsCode phoneNumber: ' + phoneNumber)
+    Logger.debug('requestSmsCode phoneNumber: ' + phoneNumber)
     let toastContent: string | null = null
     // 手机号码错误
     if (PhoneNumberUtil.isValidPhoneNumber(this.phoneNumberValue) == false) toastContent = '请输入正确的手机号码'
@@ -292,11 +291,11 @@ export struct SmsLoginDialog {
         let smsRetryCountDown = setInterval(() => {
           if (this.requestSmsCodeTimer != 0) {
             this.requestSmsCodeTimer --
-            AnyEtsUtils.log('sms count down: ' + this.requestSmsCodeTimer);
+            Logger.debug('sms count down: ' + this.requestSmsCodeTimer);
           } else {
             clearInterval(smsRetryCountDown)
             this.requestSmsCodeTimer = this.SMS_COUNTDOWN_TIME
-            AnyEtsUtils.log('sms count rest');
+            Logger.debug('sms count rest');
           }
         }, 1000);
 
@@ -313,7 +312,7 @@ export struct SmsLoginDialog {
     catch (error) {
       this.smsLoginDialogVO?.requestSmsCodeCallback?.(phoneNumber, false, null)
       // 获取错误
-      AnyEtsUtils.log('requestSmsCode error: ' + error)
+      Logger.debug('requestSmsCode error: ' + error)
       promptAction.showToast({
         message: '获取失败: ' + error,
         duration: 2000,
@@ -333,7 +332,7 @@ export struct SmsLoginDialog {
     if (nowOrientation != null && nowOrientation != undefined) this.currentOrientation = nowOrientation
     if (nowFoldStatus != null && nowFoldStatus != undefined) this.sdkFoldStatus = nowFoldStatus
 
-    AnyEtsUtils.log('初始化屏幕状态信息 breakpoint: ' + this.currentBreakpoint + ' orientation: ' + this.currentOrientation + ' fold: ' + this.sdkFoldStatus)
+    Logger.debug('初始化屏幕状态信息 breakpoint: ' + this.currentBreakpoint + ' orientation: ' + this.currentOrientation + ' fold: ' + this.sdkFoldStatus)
   }
 
 }

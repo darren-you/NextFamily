@@ -7,6 +7,7 @@ export class NavUtil {
   private static TAG = 'NavUtil';
   private static APP_BAR_HEIGHT = 'appBarHeight';
   private static BOTTOM_RECT_HEIGHT = 'bottomRectHeight';
+  public static FULL_SCREEN = false;
   private static windowStage: window.WindowStage;
   private static instance: NavUtil;
   private constructor() {}

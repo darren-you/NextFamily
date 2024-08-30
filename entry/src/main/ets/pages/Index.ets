@@ -1,5 +1,6 @@
 import { AppStorageV2 } from '@kit.ArkUI';
-import { NavUtil } from '@darren/common'
+import { BreakpointSystem, Logger, NavUtil, WindowNotifyUtils } from '@darren/common'
+import { WidgetContent } from '../components/WidgetContent';
 
 let appBarHeight: number = 90;
 let bottomNavHeight: number = 80;
@@ -8,6 +9,8 @@ let swiperController: SwiperController = new SwiperController();
 @Entry
 @ComponentV2
 struct Index {
+  private breakpointSystem = new BreakpointSystem();
+
   build() {
     Column() {
       Stack() {
@@ -24,6 +27,23 @@ struct Index {
     .width('100%')
     .height('100%')
     .backgroundColor(0xE5E5E5)
+  }
+
+  aboutToAppear(): void {
+    // 注册屏幕状态变化监听
+    this.breakpointSystem.register();
+    Logger.debug("register 屏幕尺寸、方向变化监听")
+    // 折叠屏折叠状态监听
+    WindowNotifyUtils.foldOnListener()
+    Logger.debug('register 折叠屏手机折叠状态监听');
+  }
+
+  aboutToDisappear(): void {
+    this.breakpointSystem.unregister();
+    Logger.debug('unregister 屏幕尺寸、方向变化监听');
+
+    WindowNotifyUtils.foldOffListener()
+    Logger.debug('unregister 折叠屏手机折叠状态监听');
   }
 }
 
@@ -142,16 +162,7 @@ struct BodyWidget {
   build() {
     Column() {
       Swiper(swiperController) {
-        Column(){
-          Text('控件')
-            .textAlign(TextAlign.Center)
-            .fontSize(14)
-        }
-        .width('100%')
-        .height('100%')
-        .justifyContent(FlexAlign.Center)
-        .backgroundColor(Color.Green)
-        .padding({top: appBarHeight, bottom: bottomNavHeight})
+        WidgetContent()
 
         Column(){
           Text('功能')
@@ -161,7 +172,7 @@ struct BodyWidget {
         .width('100%')
         .height('100%')
         .justifyContent(FlexAlign.Center)
-        .backgroundColor(Color.Blue)
+        .backgroundColor("$color:main_background")
         .padding({top: appBarHeight, bottom: bottomNavHeight})
 
         Column(){
@@ -172,7 +183,7 @@ struct BodyWidget {
         .width('100%')
         .height('100%')
         .justifyContent(FlexAlign.Center)
-        .backgroundColor(Color.Yellow)
+        .backgroundColor("$color:main_background")
         .padding({top: appBarHeight, bottom: bottomNavHeight})
       }
       .disableSwipe(true) // 禁止手动左右滑动

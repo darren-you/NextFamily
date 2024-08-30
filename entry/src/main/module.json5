@@ -5,7 +5,8 @@
     "description": "$string:module_desc",
     "mainElement": "EntryAbility",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
@@ -29,7 +30,8 @@
               "action.system.home"
             ]
           }
-        ]
+        ],
+        "orientation":"auto_rotation_restricted"
       }
     ],
     "extensionAbilities": [

@@ -1,10 +1,9 @@
 import { AgreementDocDialogVO } from './AgreementDocDialogVO';
 import { webview } from '@kit.ArkWeb';
 import { CommonDialog } from '../CommonDialog';
-import { AnyEtsUtils } from '../../utils/AnyEtsUtils';
-import { RequestApi } from '../../net/RequestApi';
 import { NavUtil } from '../../utils/NavUtil';
 import { BreakpointConstants } from '../../constant/BreakpointConstants';
+import { Logger } from '../../utils/Logger';
 
 @Component
 export struct AgreementDocDialog {
@@ -26,28 +25,8 @@ export struct AgreementDocDialog {
       this.progressVal = this.progressVal >= 100 ?
         0 : (this.progressVal + 10);
     }, 100);
-    if (this.type === 1) {
-      this.title = "用户协议"
-      this.url = "https://i.365you.com/v4/micro/agreement/show?protocol=userAgreement&atv=39849&os=android&" + AnyEtsUtils.convertMapToQueryString(RequestApi.getInstance()
-        .getCommonParams())
-    } else if (this.type === 2) {
-      this.title = "隐私保护政策"
-      this.url = "https://i.365you.com/v4/micro/agreement/show?protocol=privacyAgreement&atv=39849&os=android&" + AnyEtsUtils.convertMapToQueryString(RequestApi.getInstance()
-        .getCommonParams())
-    } else if (this.type === 3) {
-      this.title = "儿童隐私保护政策"
-      this.url = "https://i.365you.com/v4/micro/agreement/show?protocol=childAgreement&atv=39849&os=android&" + AnyEtsUtils.convertMapToQueryString(RequestApi.getInstance()
-        .getCommonParams())
-    } else if (this.type === 4) {
-      this.title = "第三方信息共享清单"
-      this.url = "https://i.365you.com/v4/micro/agreement/show?protocol=sdkPluginList&atv=39849&os=android&" + AnyEtsUtils.convertMapToQueryString(RequestApi.getInstance()
-        .getCommonParams())
-    } else if (this.type === 5) {
-      this.title = "个人信息清单"
-      this.url = "https://i.365you.com/v4/page/userContent?" + AnyEtsUtils.convertMapToQueryString(RequestApi.getInstance()
-        .getCommonParams())
-    }
-    AnyEtsUtils.log("router.getParams()['show']:" + this.show + " router.getParams()['type']:" + this.type)
+
+    Logger.debug("router.getParams()['show']:" + this.show + " router.getParams()['type']:" + this.type)
   }
 
   initScreenInfo() {
@@ -59,7 +38,7 @@ export struct AgreementDocDialog {
     if (nowOrientation != null && nowOrientation != undefined) this.currentOrientation = nowOrientation
     if (nowFoldStatus != null && nowFoldStatus != undefined) this.sdkFoldStatus = nowFoldStatus
 
-    AnyEtsUtils.log('SafeArea 初始屏幕状态信息 orientation: ' + this.currentOrientation + ' fold: ' + this.sdkFoldStatus)
+    Logger.debug('SafeArea 初始屏幕状态信息 orientation: ' + this.currentOrientation + ' fold: ' + this.sdkFoldStatus)
   }
 
   build() {
@@ -125,11 +104,11 @@ export struct AgreementDocDialog {
         if (this.currentOrientation === BreakpointConstants.LANDSCAPE && NavUtil.FULL_SCREEN) {
           defaultTop = 0
         }
-        AnyEtsUtils.log('顶部避让区域: ' + defaultTop)
+        Logger.debug('顶部避让区域: ' + defaultTop)
         break
       default:
         defaultTop = NavUtil.getInstance().getAppBarHeightPX()
-        AnyEtsUtils.log('未知态默认 顶部避让区域: ' + defaultTop)
+        Logger.debug('未知态默认 顶部避让区域: ' + defaultTop)
     }
     return defaultTop
   }
