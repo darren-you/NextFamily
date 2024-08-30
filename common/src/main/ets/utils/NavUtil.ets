@@ -88,6 +88,4 @@ export class NavUtil {
     return AppStorage.get<number>(NavUtil.BOTTOM_RECT_HEIGHT) ?? 0;
   }
 
-
-
 }

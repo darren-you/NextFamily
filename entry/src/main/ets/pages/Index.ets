@@ -1,4 +1,4 @@
-import { router, AppStorageV2 } from '@kit.ArkUI';
+import { AppStorageV2 } from '@kit.ArkUI';
 import { NavUtil } from '@darren/common'
 
 let appBarHeight: number = 90;
@@ -141,7 +141,6 @@ struct BottomNavWidget {
 struct BodyWidget {
   build() {
     Column() {
-      // todo Swiper需要禁止手动左右滑动
       Swiper(swiperController) {
         Column(){
           Text('控件')
@@ -153,8 +152,6 @@ struct BodyWidget {
         .justifyContent(FlexAlign.Center)
         .backgroundColor(Color.Green)
         .padding({top: appBarHeight, bottom: bottomNavHeight})
-
-
 
         Column(){
           Text('功能')
@@ -178,10 +175,9 @@ struct BodyWidget {
         .backgroundColor(Color.Yellow)
         .padding({top: appBarHeight, bottom: bottomNavHeight})
       }
-      .disableSwipe(true)
+      .disableSwipe(true) // 禁止手动左右滑动
       .indicator(false)
       .loop(false)
-
     }
     .width('100%')
     .height('100%')
@@ -189,6 +185,7 @@ struct BodyWidget {
   }
 }
 
+// Swiper切换选中Page
 function currentNavTab(navTabEnum: number): void {
   swiperController.changeIndex(navTabEnum.valueOf(), true);
 }
