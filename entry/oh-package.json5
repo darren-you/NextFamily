@@ -6,7 +6,6 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "@darren/common": "../common"
   }
 }
 
