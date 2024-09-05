@@ -1,5 +1,6 @@
-import { router, AppStorageV2 } from '@kit.ArkUI';
-import { NavUtil } from '@darren/common'
+import { AppStorageV2 } from '@kit.ArkUI';
+import { BreakpointSystem, Logger, NavUtil, WindowNotifyUtils } from '@darren/common'
+import { WidgetPage } from '../components/WidgetPage';
 
 let appBarHeight: number = 90;
 let bottomNavHeight: number = 80;
@@ -8,6 +9,8 @@ let swiperController: SwiperController = new SwiperController();
 @Entry
 @ComponentV2
 struct Index {
+  private breakpointSystem = new BreakpointSystem();
+
   build() {
     Column() {
       Stack() {
@@ -25,6 +28,23 @@ struct Index {
     .height('100%')
     .backgroundColor(0xE5E5E5)
   }
+
+  aboutToAppear(): void {
+    // 注册屏幕状态变化监听
+    this.breakpointSystem.register();
+    Logger.debug("register 屏幕尺寸、方向变化监听")
+    // 折叠屏折叠状态监听
+    WindowNotifyUtils.foldOnListener()
+    Logger.debug('register 折叠屏手机折叠状态监听');
+  }
+
+  aboutToDisappear(): void {
+    this.breakpointSystem.unregister();
+    Logger.debug('unregister 屏幕尺寸、方向变化监听');
+
+    WindowNotifyUtils.foldOffListener()
+    Logger.debug('unregister 折叠屏手机折叠状态监听');
+  }
 }
 
 /**
@@ -41,8 +61,8 @@ struct TopNavWidget {
         Text(this.currentNavTabState.titleText).fontSize(26).margin({left: 20}).fontWeight(FontWeight.Bold)
       }
       .width('100%')
-      .height(appBarHeight - (px2vp(NavUtil.getInstance().getAppBarHeight())))
-      .margin({top: NavUtil.getInstance().getAppBarHeightPX()})
+      .height(appBarHeight - (px2vp(NavUtil.appBarHeight())))
+      .margin({top: NavUtil.appBarHeightPX()})
     }
     .width('100%')
     .height(appBarHeight)
@@ -128,7 +148,7 @@ struct BottomNavWidget {
     .height(bottomNavHeight)
     .backgroundColor(Color.White)
     .position({bottom: 0})
-    .padding({bottom: NavUtil.getInstance().getBottomRectHeightPX()})
+    .padding({bottom: NavUtil.bottomRectHeightPX()})
     .zIndex(2)
 
   }
@@ -141,20 +161,8 @@ struct BottomNavWidget {
 struct BodyWidget {
   build() {
     Column() {
-      // todo Swiper需要禁止手动左右滑动
       Swiper(swiperController) {
-        Column(){
-          Text('控件')
-            .textAlign(TextAlign.Center)
-            .fontSize(14)
-        }
-        .width('100%')
-        .height('100%')
-        .justifyContent(FlexAlign.Center)
-        .backgroundColor(Color.Green)
-        .padding({top: appBarHeight, bottom: bottomNavHeight})
-
-
+        WidgetPage()
 
         Column(){
           Text('功能')
@@ -164,7 +172,7 @@ struct BodyWidget {
         .width('100%')
         .height('100%')
         .justifyContent(FlexAlign.Center)
-        .backgroundColor(Color.Blue)
+        .backgroundColor("$color:main_background")
         .padding({top: appBarHeight, bottom: bottomNavHeight})
 
         Column(){
@@ -175,13 +183,12 @@ struct BodyWidget {
         .width('100%')
         .height('100%')
         .justifyContent(FlexAlign.Center)
-        .backgroundColor(Color.Yellow)
+        .backgroundColor("$color:main_background")
         .padding({top: appBarHeight, bottom: bottomNavHeight})
       }
-      .disableSwipe(true)
+      .disableSwipe(true) // 禁止手动左右滑动
       .indicator(false)
       .loop(false)
-
     }
     .width('100%')
     .height('100%')
@@ -189,6 +196,7 @@ struct BodyWidget {
   }
 }
 
+// Swiper切换选中Page
 function currentNavTab(navTabEnum: number): void {
   swiperController.changeIndex(navTabEnum.valueOf(), true);
 }

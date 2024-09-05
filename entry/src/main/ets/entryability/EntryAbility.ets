@@ -27,8 +27,8 @@ export default class EntryAbility extends UIAbility {
       hilog.info(EntryAbility.DOMAIN, EntryAbility.TAG, 'Succeeded in loading the content.');
 
       // 应用沉浸式效果
-      NavUtil.getInstance().init(windowStage);
-      NavUtil.getInstance().setWindowLayoutFullScreen(true);
+      NavUtil.init(windowStage);
+      NavUtil.setFullScreen(true);
     });
   }
 

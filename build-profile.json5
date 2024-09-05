@@ -6,9 +6,9 @@
         "type": "HarmonyOS",
         "material": {
           "certpath": "/Users/darrenyou/.ohos/config/default_NextFamily_Mcvl_NCwi3JUsdDo_Uqn6Xc81z04YRpp7-bM2Gj8Aas=.cer",
-          "storePassword": "0000001B3696577F4E5B2785EB1155E028C0877977D70E8315A5F23DF3CC74E99A6D17BC1D2C07D59434EC",
+          "storePassword": "0000001B8E2D5827FADDD0EA7DB84B327BAEC7FE4AE55B1906DA408BBA106EAB3F241981044183BD234A2F",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B7F40E5BB13830D8A3AF77D6CA96B85759846A57B6F28475981375CA4E67F13CBD8C8531C2D81A3",
+          "keyPassword": "0000001B92D35EF46573E42626B99202BDE26EB3B127087AE837593EF52C320ABDD7D7D3147CA08285FB7E",
           "profile": "/Users/darrenyou/.ohos/config/default_NextFamily_Mcvl_NCwi3JUsdDo_Uqn6Xc81z04YRpp7-bM2Gj8Aas=.p7b",
           "signAlg": "SHA256withECDSA",
           "storeFile": "/Users/darrenyou/.ohos/config/default_NextFamily_Mcvl_NCwi3JUsdDo_Uqn6Xc81z04YRpp7-bM2Gj8Aas=.p12"
@@ -44,6 +44,10 @@
           ]
         }
       ]
+    },
+    {
+      "name": "common",
+      "srcPath": "./common",
     }
   ]
 }
