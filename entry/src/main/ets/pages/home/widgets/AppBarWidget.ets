@@ -8,7 +8,7 @@ import { NavConstants } from '../../../constant/NavConstants';
  */
 @ComponentV2
 export struct AppBarWidget {
-  @Local storageBottomNavTabVO = AppStorageV2.connect(BottomNavTabVO, () => new BottomNavTabVO(0, '控件', $r('sys.symbol.ohos_folder_badge_plus'), true))!;
+  @Local storageBottomNavTabVO: BottomNavTabVO = AppStorageV2.connect(BottomNavTabVO, () => new BottomNavTabVO(0, '控件', $r('sys.symbol.ohos_folder_badge_plus'), true))!;
 
   build() {
     Column() {
