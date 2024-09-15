@@ -12,5 +12,7 @@
   "repository":"https://github.com/darren-you/NextFamily",
   "main": "Index.ets",
   "license": "Apache-2.0",
-  "dependencies": {}
+  "dependencies": {
+    "@hadss/hmrouter": "^1.0.0-rc.3"
+  }
 }

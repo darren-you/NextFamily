@@ -1,4 +1,4 @@
-export default class PhoneNumberUtil {
+export class PhoneNumberUtil {
   private constructor() {}
 
   /**

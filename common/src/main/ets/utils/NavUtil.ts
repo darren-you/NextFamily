@@ -1,10 +1,8 @@
 import { window } from '@kit.ArkUI';
-import hilog from '@ohos.hilog';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { Logger } from './Logger';
 
 export class NavUtil {
-  private static DOMAIN = 0x0001;
-  private static TAG = 'NavUtil';
   private static APP_BAR_HEIGHT = 'appBarHeight';
   private static BOTTOM_RECT_HEIGHT = 'bottomRectHeight';
   public static FULL_SCREEN = false;
@@ -38,8 +36,8 @@ export class NavUtil {
     let bottomRectHeight = bottomRectAvoidArea.bottomRect.height;
     AppStorage.setOrCreate(NavUtil.BOTTOM_RECT_HEIGHT, bottomRectHeight);
 
-    hilog.info(NavUtil.DOMAIN, NavUtil.TAG, "顶部状态栏高: " + appBarHeight + " 底部导航条高: " + bottomRectHeight);
-    hilog.info(NavUtil.DOMAIN, NavUtil.TAG, 'NavUtil初始化完成');
+    Logger.debug("顶部状态栏高: " + appBarHeight + " 底部导航条高: " + bottomRectHeight);
+    Logger.debug('NavUtil初始化完成');
   }
 
   /**
@@ -51,9 +49,9 @@ export class NavUtil {
     let windowClass: window.Window = NavUtil.windowStage.getMainWindowSync(); // 获取应用主窗口
     windowClass.setWindowLayoutFullScreen(isLayoutFullScreen)
       .then(() => {
-        hilog.info(NavUtil.DOMAIN, NavUtil.TAG, '设置窗口全屏成功');
+        Logger.debug('设置窗口全屏成功');
       }).catch((err: BusinessError) => {
-      hilog.info(NavUtil.DOMAIN, NavUtil.TAG, '设置窗口全屏错误: ' + err);
+      Logger.debug('设置窗口全屏错误: ' + err);
     });
   }
 

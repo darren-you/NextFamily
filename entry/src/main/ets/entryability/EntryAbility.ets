@@ -2,12 +2,18 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { NavUtil } from '@darren/common';
+import { HMRouterMgr } from '@hadss/hmrouter';
 
 export default class EntryAbility extends UIAbility {
   private static DOMAIN = 0x0000;
   private static TAG = 'EntryAbility';
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    // 初始化路由框架
+    // 文档: https://gitee.com/hadss/hmrouter
+    HMRouterMgr.init({
+      context: this.context
+    })
     hilog.info(EntryAbility.DOMAIN, EntryAbility.TAG, '%{public}s', 'Ability onCreate');
   }
 
@@ -19,7 +25,7 @@ export default class EntryAbility extends UIAbility {
     // Main window is created, set main page for this ability
     hilog.info(EntryAbility.DOMAIN, EntryAbility.TAG, '%{public}s', 'Ability onWindowStageCreate');
 
-    windowStage.loadContent('pages/Index', (err) => {
+    windowStage.loadContent('pages/index/Index', (err) => {
       if (err.code) {
         hilog.error(EntryAbility.DOMAIN, EntryAbility.TAG, 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
         return;

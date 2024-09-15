@@ -1,6 +1,4 @@
 import { promptAction } from '@kit.ArkUI'
-import PhoneNumberUtil from '../../utils/PhoneNumberUtil'
-import VerifyCodeUtil from '../../utils/VerifyCodeUtil'
 import { THIRD_LOGIN_TYPE } from './ThirdLoginEnum'
 import { ThirdLoginVO } from './ThirdLoginVO'
 import { SmsLoginDialogVO } from './SmsLoginDialogVO'
@@ -8,7 +6,9 @@ import { CommonDialog } from '../CommonDialog'
 import { AgreementDocDialogVO } from '../agreementdialog/AgreementDocDialogVO'
 import { AgreementDocDialogComponent } from '../agreementdialog/AgreementDocDialog'
 import { Logger } from '../../utils/Logger'
-import { BreakpointConstants } from '../../constant/BreakpointConstants'
+import { DeviceScreenConstants } from '../../constant/DeviceScreenConstants'
+import { PhoneNumberUtil } from '../../utils/PhoneNumberUtil'
+import { VerifyCodeUtil } from '../../utils/VerifyCodeUtil'
 
 /**
  * 第三方登录
@@ -101,7 +101,7 @@ struct AgreementComponent {
 @Component
 export struct SmsLoginDialog {
   @StorageProp('currentBreakpoint') currentBreakpoint: string = 'md';
-  @StorageProp('currentOrientation') currentOrientation: number = BreakpointConstants.LANDSCAPE
+  @StorageProp('currentOrientation') currentOrientation: number = DeviceScreenConstants.DEVICE_SCREEN_LANDSCAPE
   @StorageProp('sdkFoldStatus') sdkFoldStatus: number = 0;
 
   SMS_COUNTDOWN_TIME: number = 60
@@ -203,18 +203,18 @@ export struct SmsLoginDialog {
     switch (this.sdkFoldStatus) {
       // Unknown | 直屏
       case 0:
-        this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultWidth = '80%' : defaultWidth = '50%'
+        this.currentOrientation === DeviceScreenConstants.DEVICE_SCREEN_PORTRAIT ? defaultWidth = '80%' : defaultWidth = '50%'
         Logger.debug('Unknown | 直屏 宽: ' + defaultWidth)
         break
       // 折叠屏 [展开、半折] 态
       case 1:
       case 3:
-        this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultWidth = '55%' : defaultWidth = '50%'
+        this.currentOrientation === DeviceScreenConstants.DEVICE_SCREEN_PORTRAIT ? defaultWidth = '55%' : defaultWidth = '50%'
         Logger.debug('折叠屏 [展开、半折] 态 宽: ' + defaultWidth)
         break
       // 折叠屏 折叠态
       case 2:
-        this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultWidth = '90%' : defaultWidth = '50%'
+        this.currentOrientation === DeviceScreenConstants.DEVICE_SCREEN_PORTRAIT ? defaultWidth = '90%' : defaultWidth = '50%'
         Logger.debug('折叠屏 折叠态 宽: ' + defaultWidth)
         break
       default:
@@ -231,20 +231,20 @@ export struct SmsLoginDialog {
       // Unknown | 直屏
       case 0:
         //this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '30%' : defaultHeight = '90%'
-        this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '35%' : defaultHeight = '75%'
+        this.currentOrientation === DeviceScreenConstants.DEVICE_SCREEN_PORTRAIT ? defaultHeight = '35%' : defaultHeight = '75%'
         Logger.debug('Unknown | 直屏 高: ' + defaultHeight)
         break
       // 折叠屏 [展开、半折] 态
       case 1:
       case 3:
         //this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '45%' : defaultHeight = '50%'
-        this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '35%' : defaultHeight = '40%'
+        this.currentOrientation === DeviceScreenConstants.DEVICE_SCREEN_PORTRAIT ? defaultHeight = '35%' : defaultHeight = '40%'
         Logger.debug('折叠屏 [展开、半折] 态 高: ' + defaultHeight)
         break
       // 折叠屏 折叠态
       case 2:
         //this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '45%' : defaultHeight = '90%'
-        this.currentOrientation === BreakpointConstants.PORTRAIT ? defaultHeight = '35%' : defaultHeight = '80%'
+        this.currentOrientation === DeviceScreenConstants.DEVICE_SCREEN_PORTRAIT ? defaultHeight = '35%' : defaultHeight = '80%'
         Logger.debug('折叠屏 折叠态 高: ' + defaultHeight)
         break
       default:
@@ -321,8 +321,8 @@ export struct SmsLoginDialog {
   }
 
   aboutToAppear(): void {
-    let nowBreakpoint: string | null | undefined = AppStorage.get(BreakpointConstants.CURRENT_BREAKPOINT)
-    let nowOrientation: number | null | undefined = AppStorage.get(BreakpointConstants.CURRENT_ORIENTATION)
+    let nowBreakpoint: string | null | undefined = AppStorage.get(DeviceScreenConstants.CURRENT_BREAKPOINT)
+    let nowOrientation: number | null | undefined = AppStorage.get(DeviceScreenConstants.CURRENT_ORIENTATION)
     let nowFoldStatus: number | null | undefined = AppStorage.get('sdkFoldStatus')
 
     console.log('nowBreakpoint: ' + nowBreakpoint + ' nowOrientation: ' + nowOrientation + ' nowFoldStatus: ' + nowFoldStatus)

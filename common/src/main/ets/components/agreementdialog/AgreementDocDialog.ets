@@ -2,13 +2,13 @@ import { AgreementDocDialogVO } from './AgreementDocDialogVO';
 import { webview } from '@kit.ArkWeb';
 import { CommonDialog } from '../CommonDialog';
 import { NavUtil } from '../../utils/NavUtil';
-import { BreakpointConstants } from '../../constant/BreakpointConstants';
 import { Logger } from '../../utils/Logger';
+import { DeviceScreenConstants } from '../../constant/DeviceScreenConstants';
 
 @Component
 export struct AgreementDocDialog {
   agreementDocDialogVO?: AgreementDocDialogVO
-  @StorageProp('currentOrientation') currentOrientation: number = BreakpointConstants.LANDSCAPE
+  @StorageProp('currentOrientation') currentOrientation: number = DeviceScreenConstants.DEVICE_SCREEN_LANDSCAPE
   @StorageProp('sdkFoldStatus') sdkFoldStatus: number = 0;
   webController: webview.WebviewController = new webview.WebviewController();
   @State type: number = 1;
@@ -30,7 +30,7 @@ export struct AgreementDocDialog {
   }
 
   initScreenInfo() {
-    let nowOrientation: number | null | undefined = AppStorage.get(BreakpointConstants.CURRENT_ORIENTATION)
+    let nowOrientation: number | null | undefined = AppStorage.get(DeviceScreenConstants.CURRENT_ORIENTATION)
     let nowFoldStatus: number | null | undefined = AppStorage.get('sdkFoldStatus')
 
     console.log('nowOrientation: ' + nowOrientation + ' nowFoldStatus: ' + nowFoldStatus)
@@ -98,10 +98,10 @@ export struct AgreementDocDialog {
       case 3:
       // 折叠屏 折叠态
       case 2:
-        if (this.currentOrientation === BreakpointConstants.PORTRAIT && NavUtil.FULL_SCREEN) {
+        if (this.currentOrientation === DeviceScreenConstants.DEVICE_SCREEN_PORTRAIT && NavUtil.FULL_SCREEN) {
           defaultTop = NavUtil.appBarHeightPX()
         }
-        if (this.currentOrientation === BreakpointConstants.LANDSCAPE && NavUtil.FULL_SCREEN) {
+        if (this.currentOrientation === DeviceScreenConstants.DEVICE_SCREEN_LANDSCAPE && NavUtil.FULL_SCREEN) {
           defaultTop = 0
         }
         Logger.debug('顶部避让区域: ' + defaultTop)

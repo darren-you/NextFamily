@@ -1,4 +1,4 @@
-export default class VerifyCodeUtil {
+export class VerifyCodeUtil {
   private constructor() {}
 
   static checkVerifyCode(verifyCode: string): boolean {

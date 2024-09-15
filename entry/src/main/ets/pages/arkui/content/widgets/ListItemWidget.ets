@@ -1,4 +1,4 @@
-import { ListItemVO } from './ListItemVO';
+import { ListItemVO } from '../vo/ListItemVO';
 
 @ComponentV2
 export struct ListItemWidget {
