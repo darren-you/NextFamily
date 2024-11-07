@@ -1,0 +1,18 @@
+{
+  "name": "@darren/common",
+  "version": "1.0.0",
+  "description": "基于API12的鸿蒙工程通用基础能力库，例如：日志、文件、网络、数据库、设备信息、屏幕适配等。",
+  "keywords":["tools","project"],
+  "author":{
+    "name":"DarrenYou",
+    "url":"https://github.com/darren-you",
+    "email":"work@darrenyou.cn"
+  },
+  "homepage":"https://darrenyou.cn",
+  "repository":"https://github.com/darren-you/NextFamily",
+  "main": "Index.ets",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hadss/hmrouter": "^1.0.0-rc.6"
+  }
+}

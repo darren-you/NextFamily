@@ -1,0 +1,44 @@
+{
+  "color": [
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "item_title_font_current",
+      "value": "#FF3B7AEB"
+    },
+    {
+      "name": "item_title_font_normal",
+      "value": "#E6000000"
+    },
+    {
+      "name": "bottom_nav_current",
+      "value": "#FF3B7AEB"
+    },
+    {
+      "name": "bottom_nav_normal",
+      "value": "#E6000000"
+    },
+    {
+      "name": "main_background",
+      "value": "#FFEDEDED"
+    },
+    {
+      "name": "appbar_background",
+      "value": "#FFEEEEEE"
+    },
+    {
+      "name": "bottom_bar_background",
+      "value": "#FFF9F9F9"
+    },
+    {
+      "name": "text_primary",
+      "value": "#FF333333"
+    }
+  ]
+}

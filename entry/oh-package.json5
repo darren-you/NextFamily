@@ -1,0 +1,13 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@darren/common": "file:../common",
+    "@hadss/hmrouter": "^1.0.0-rc.3"
+  }
+}
+
